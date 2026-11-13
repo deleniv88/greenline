@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GREENLINE Golf Club — Your perfect round awaits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#c6f432;--lime2:#b4e21f;--ink:#111312;--grey:#9b9d9a;--soft:#f3f3f1;--line:#e6e6e3;--dark:#141614;--r:22px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input{font:inherit;color:inherit;border:0;background:none}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
+.tag{display:inline-flex;align-items:center;padding:7px 14px;border:1px solid var(--line);border-radius:99px;font-size:12px;font-weight:500;color:#555}
+.h2{font-size:clamp(28px,3.4vw,44px);line-height:1.18;font-weight:500;letter-spacing:-.025em;text-wrap:balance}
+.h2 .g{color:var(--grey)}
+.lime-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:99px;background:var(--lime);color:var(--ink);font-weight:600;font-size:14px;transition:.25s}
+.lime-btn:hover{background:var(--lime2)}
+.arrow{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center}
+section{position:relative}
+
+/* ---------- HERO ---------- */
+#heroTrack{height:330vh;position:relative}
+#heroSticky{position:sticky;top:0;height:100vh;padding:12px}
+#heroCard{position:relative;height:100%;border-radius:var(--r);overflow:hidden;background:linear-gradient(#64a3e3,#6ba7e5 40%,#8da538 60%,#88a135)}
+#heroMedia,#heroCanvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+#heroCanvas{display:none}
+#heroCard::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,0) 22%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42))}
+.hnav{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:22px 28px;color:#fff}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.04em;font-size:17px}
+.logo i{width:26px;height:26px;border-radius:50%;background:var(--lime);display:grid;place-items:center;position:relative}
+.logo i::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.hnav nav{display:flex;gap:30px;font-size:13.5px;font-weight:500}
+.hnav nav a{color:#fff;text-decoration:none;opacity:.92}
+.hnav .r{display:flex;gap:10px;align-items:center}
+.ic{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:grid;place-items:center}
+.ic.l{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.htop{position:absolute;left:28px;right:28px;top:84px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;color:#fff}
+.htop p{font-size:13px;line-height:1.5;max-width:230px;opacity:.95}
+.pill-w{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.7);font-size:13px;font-weight:500;color:#fff;backdrop-filter:blur(6px);background:rgba(255,255,255,.08)}
+.hbot{position:absolute;left:28px;right:28px;bottom:28px;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.hbot h1{color:#fff;font-size:clamp(40px,5.6vw,80px);line-height:1.02;font-weight:500;letter-spacing:-.035em;text-wrap:balance;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.book{display:flex;align-items:center;gap:6px;padding:6px;border-radius:99px;background:rgba(255,255,255,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.4);min-width:360px}
+.book span{flex:1;padding:0 16px;color:#fff;font-size:13.5px}
+.book button{padding:12px 22px;border-radius:99px;background:var(--lime);font-weight:600;font-size:13.5px}
+#scrollCue{position:absolute;left:50%;top:84px;transform:translateX(-50%);z-index:3;color:#fff;font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+#scrollCue i{width:22px;height:34px;border:1.5px solid rgba(255,255,255,.8);border-radius:12px;position:relative}
+#scrollCue i::after{content:'';position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:#fff;animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(10px)}}
+
+/* ball spot */
+.spot{display:inline-block;width:var(--bs);height:var(--bs);border-radius:50%;border:1.5px dashed #c9cbc6;vertical-align:middle;position:relative;transition:border-color .4s,background .4s}
+.spot.hit{border-color:transparent;background:radial-gradient(closest-side,rgba(0,0,0,.14),rgba(0,0,0,0)) 50% 92%/90% 30% no-repeat}
+
+/* ---------- ABOUT ---------- */
+#about{padding:120px 0 90px;text-align:center}
+#about .h2{max-width:900px;margin:22px auto 0}
+#about .h2 .chip{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px;border-radius:99px;background:var(--soft);vertical-align:middle;font-size:.42em;letter-spacing:0;color:#555;font-weight:500;margin:0 6px}
+.aboutRow{display:flex;justify-content:space-between;align-items:flex-end;margin-top:60px;gap:30px;text-align:left}
+.aboutRow .ph{display:flex;gap:12px}
+.aboutRow .ph img{width:190px;height:190px;object-fit:cover;border-radius:16px}
+.icons{display:flex;gap:26px}
+.icons div{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12.5px;color:#555}
+.icons b{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.icons .on b{background:var(--lime);border-color:var(--lime)}
+.icons svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.6}
+
+/* ---------- EXPLORE ---------- */
+#explore{padding:40px 0 110px}
+.exHead{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;margin-bottom:34px}
+.exHead p{font-size:clamp(18px,1.7vw,23px);line-height:1.4;font-weight:500;letter-spacing:-.015em}
+.exHead p span{color:var(--grey)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.card:hover img{transform:scale(1.04)}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 55%,rgba(0,0,0,.55))}
+.card .lab{position:absolute;left:20px;bottom:20px;z-index:2;color:#fff;font-size:20px;font-weight:500;letter-spacing:-.01em}
+.card .top{position:absolute;left:16px;top:16px;z-index:2}
+.card .top .tag{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff;backdrop-filter:blur(8px)}
+.card .bub{position:absolute;right:16px;top:16px;z-index:2;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:99px;background:#fff;font-size:12px;font-weight:600}
+.av{display:flex}.av i{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-8px;background:#ccc}
+.av i:first-child{margin-left:0;background:#d9b99b}.av i:nth-child(2){background:#8aa17a}.av i:nth-child(3){background:#6b7d93}
+.card .spot{position:absolute;right:22px;bottom:22px;z-index:2;border-color:rgba(255,255,255,.75)}
+
+/* ---------- FEATURES ---------- */
+#features{padding:70px 0 130px}
+.feat{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+.flist{display:flex;flex-direction:column;gap:6px}
+.fi{display:flex;align-items:center;gap:16px;font-size:clamp(22px,2.3vw,32px);font-weight:500;letter-spacing:-.02em;color:#c3c5c1;padding:8px 0;transition:color .4s}
+.fi .ln{width:0;height:2px;background:var(--ink);transition:width .5s}
+.fi.on{color:var(--ink)}.fi.on .ln{width:44px}
+.fi .spot{--bs:28px;opacity:0}
+.fpic{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;align-items:end}
+.fpic img{border-radius:18px;object-fit:cover;width:100%}
+.fpic .a{aspect-ratio:4/5}
+.fpic .b{aspect-ratio:1;}
+.quote{margin-top:16px;font-size:14px;line-height:1.6;color:#555}
+.quote b{display:block;color:var(--ink);margin-top:10px;font-size:13px}
+
+/* ---------- MEMBERSHIP ---------- */
+#membership{padding:30px 0 120px}
+.mHead{text-align:center;margin-bottom:46px}
+.mHead .h2{margin-top:18px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.plan{border-radius:20px;background:var(--soft);padding:30px 28px;display:flex;flex-direction:column;position:relative}
+.plan h3{font-size:20px;font-weight:600}
+.plan .pr{font-size:44px;font-weight:500;letter-spacing:-.03em;margin:22px 0 4px}
+.plan .pr small{font-size:15px;color:var(--grey);font-weight:500;letter-spacing:0}
+.plan p{font-size:14px;color:#666;line-height:1.55}
+.plan ul{list-style:none;margin:22px 0 28px;display:flex;flex-direction:column;gap:11px;font-size:14px}
+.plan li{display:flex;gap:10px;align-items:center}
+.plan li::before{content:'';width:18px;height:18px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/11px no-repeat;flex:none}
+.plan .go{margin-top:auto;display:flex;justify-content:center;padding:14px;border-radius:99px;border:1px solid #cfd0cc;font-weight:600;font-size:14px;transition:.25s}
+.plan .go:hover{background:#fff}
+.plan.feat2{background:var(--dark);color:#fff}
+.plan.feat2 p{color:#aaa}.plan.feat2 .pr small{color:#888}
+.plan.feat2 .go{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.badge{position:absolute;right:20px;top:22px;display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:var(--lime);color:var(--ink);font-size:12px;font-weight:600}
+
+/* ---------- HOLE ---------- */
+#hole{padding:0 0 12px}
+#holeTrack{height:300vh;position:relative}
+#holeSticky{position:sticky;top:0;height:100vh;padding:12px}
+#holeCard{position:relative;border-radius:var(--r);overflow:hidden;height:100%}
+#holeCard .base,#holeCanvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#holeCanvas{z-index:1}
+#holeCard .txt{position:absolute;left:36px;top:34px;z-index:3;color:#fff;max-width:520px}
+#holeCard .txt::before{content:'';position:absolute;left:-60px;top:-60px;width:700px;height:360px;z-index:-1;background:radial-gradient(closest-side,rgba(0,0,0,.38),rgba(0,0,0,0))}
+#holeCard h2{font-size:clamp(34px,4.4vw,62px);font-weight:500;letter-spacing:-.035em;line-height:1.04;margin:16px 0 22px;text-wrap:balance}
+#holeCard .tag{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55);color:#fff;backdrop-filter:blur(8px)}
+#holeCard .swap{display:grid}
+#holeCard .swap span{grid-area:1/1;display:block;transition:opacity .6s,transform .6s}
+#holeCard .swap .b{opacity:0;transform:translateY(16px)}
+#holeCard.done .swap .a{opacity:0;transform:translateY(-16px)}
+#holeCard.done .swap .b{opacity:1;transform:none}
+#holeCard .cta{opacity:.0;transform:translateY(10px);transition:.6s .2s}
+#holeCard.done .cta{opacity:1;transform:none}
+#plop{position:absolute;z-index:59;width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.9);opacity:0;pointer-events:none;transform:translate(-50%,-50%)}
+#plop.go{animation:plop .9s ease-out}
+@keyframes plop{0%{opacity:.9;width:10px;height:4px}100%{opacity:0;width:220px;height:60px}}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--dark);color:#fff;margin:0 12px 12px;border-radius:var(--r);padding:56px 0 28px}
+.fgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:30px}
+footer h4{font-size:14px;font-weight:600;margin-bottom:16px}
+footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration:none;display:block}
+.sub{display:flex;gap:6px;padding:5px;border-radius:99px;background:#232623;margin-top:14px}
+.sub input{flex:1;padding:0 14px;font-size:13px;color:#fff;outline:none}
+.sub button{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink);font-weight:700}
+.fbot{display:flex;justify-content:space-between;margin-top:46px;padding-top:22px;border-top:1px solid #2a2d2a;font-size:12.5px;color:#7d807b}
+
+/* ---------- BALL ---------- */
+#ballLayer{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:50;pointer-events:none;overflow:visible}
+#ball{position:absolute;left:0;top:0;width:200px;height:200px;transform-origin:50% 50%;will-change:transform}
+#ballShadow{position:absolute;left:0;top:0;width:200px;height:200px;transform-origin:50% 50%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.32),rgba(0,0,0,0));will-change:transform,opacity}
+
+@media (max-width:900px){
+ .wrap{width:calc(100% - 32px)}
+ #heroSticky{padding:8px}
+ .hnav{padding:16px 18px}.hnav nav{display:none}
+ .htop{display:none}
+ .hbot{left:18px;right:18px;bottom:20px;flex-direction:column;align-items:stretch}
+ .book{min-width:0}
+ #scrollCue{display:none}
+ #heroMedia{-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 92%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 92%,transparent)}
+ .hbot{top:80px;bottom:20px;justify-content:space-between}
+ .hbot h1{font-size:44px}
+ #about{padding:80px 0 60px}
+ .aboutRow{flex-direction:column;align-items:center}
+ .aboutRow .ph img{width:44vw;height:44vw}
+ .icons{gap:14px}.icons b{width:52px;height:52px}
+ .exHead{grid-template-columns:1fr;gap:14px}
+ .cards{grid-template-columns:1fr}
+ .card{aspect-ratio:5/4}
+ .feat{grid-template-columns:1fr;gap:36px}
+ .plans{grid-template-columns:1fr}
+ #holeSticky{padding:8px}
+ #holeCard .txt{left:20px;top:22px;right:20px}
+ footer{margin:0 8px 8px}
+ .fgrid{grid-template-columns:1fr 1fr}
+ .fbot{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div id="heroTrack">
+ <div id="heroSticky">
+  <div id="heroCard">
+   <img id="heroMedia" src="img/hero.webp" alt="Golfer at address on the tee">
+   <canvas id="heroCanvas"></canvas>
+   <div class="hnav">
+    <div class="logo"><i></i>GREENLINE</div>
+    <nav><a href="#about">The Club</a><a href="#explore">Academy</a><a href="#features">Course</a><a href="#membership">Membership</a><a href="#hole">Contact</a></nav>
+    <div class="r"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><span class="ic l"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span></div>
+   </div>
+   <div class="htop"><p>Championship 18 holes, a pro academy and a clubhouse — 20 minutes from the city.</p><span class="pill-w">Explore the course →</span></div>
+   <div class="hbot">
+    <h1>Your perfect round awaits.</h1>
+    <div class="book"><span>Choose a date &amp; tee time</span><button>Book</button></div>
+   </div>
+   <div id="scrollCue"><i></i>Scroll to swing</div>
+  </div>
+ </div>
+</div>
+
+<section id="about"><div class="wrap">
+ <span class="tag">About us</span>
+ <h2 class="h2">Championship golf <span class="chip"><span class="spot" data-spot="about"></span>18 holes · par 72</span> a pro academy and a clubhouse — <span class="g">play more, play better, every single week.</span></h2>
+ <div class="aboutRow">
+  <div class="ph"><img src="img/coach.webp" alt="Coach teaching a golfer" loading="lazy"><img src="img/cart.webp" alt="Golf cart and bag on the course" loading="lazy"></div>
+  <div class="icons">
+   <div class="on"><b><svg viewBox="0 0 24 24"><path d="M12 3v18M12 3l7 4-7 4"/></svg></b>Course</div>
+   <div><b><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21c1-4 3.5-6 7-6s6 2 7 6"/></svg></b>Coaching</div>
+   <div><b><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11"/></svg></b>Clubhouse</div>
+   <div><b><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></b>Pro shop</div>
+  </div>
+ </div>
+</div></section>
+
+<section id="explore"><div class="wrap">
+ <div class="exHead"><span class="tag" style="justify-self:start">Explore</span><p>Training, membership and a championship course — <span>everything your game needs, in one place, all season long.</span></p></div>
+ <div class="cards">
+  <div class="card"><img src="img/coach.webp" alt="Golf academy lesson" loading="lazy"><div class="top"><span class="tag">Academy</span></div><div class="lab">Golf Training Mastery</div></div>
+  <div class="card"><img src="img/walk.webp" alt="Members walking the fairway" loading="lazy"><div class="top"><span class="tag">Membership</span></div><div class="bub"><span class="av"><i></i><i></i><i></i></span>1.2k members</div><div class="lab">Exclusive Club Membership</div><span class="spot" data-spot="card"></span></div>
+  <div class="card"><img src="img/cart.webp" alt="Golf cart on the course" loading="lazy"><div class="top"><span class="tag">Pro shop</span></div><div class="lab">Golf Gear &amp; Carts</div></div>
+ </div>
+</div></section>
+
+<section id="features"><div class="wrap feat">
+ <div>
+  <span class="tag">The course</span>
+  <div class="flist" style="margin-top:26px">
+   <div class="fi"><span class="ln"></span><span class="spot" data-spot="f0"></span>Game-improving academy</div>
+   <div class="fi"><span class="ln"></span><span class="spot"></span>Championship 18 holes</div>
+   <div class="fi on"><span class="ln"></span><span class="spot"></span>Pro-level practice range</div>
+   <div class="fi"><span class="ln"></span><span class="spot"></span>Clubhouse &amp; spa</div>
+  </div>
+ </div>
+ <div class="fpic">
+  <img class="a" src="img/aerial.webp" alt="Aerial view of the course" loading="lazy">
+  <div><img class="b" src="img/walk.webp" alt="Members on the course" loading="lazy"><div class="quote">“The best-kept greens within an hour of the city. I play here every Saturday.”<b>Mark Nowak · member since 2021</b></div></div>
+ </div>
+</div></section>
+
+<section id="membership"><div class="wrap">
+ <div class="mHead"><span class="tag">Membership</span><h2 class="h2">Choose how <span class="g">you play</span></h2></div>
+ <div class="plans">
+  <div class="plan"><h3>Weekday</h3><div class="pr">€190<small> / month</small></div><p>For players who love quiet mornings on the course.</p><ul><li>Mon–Fri unlimited play</li><li>Practice range access</li><li>10% off in the pro shop</li></ul><button class="go">Choose Weekday</button></div>
+  <div class="plan feat2"><span class="badge"><span class="spot" data-spot="plan" style="--bs:22px;border-color:#111"></span>Most popular</span><h3>Full Member</h3><div class="pr">€320<small> / month</small></div><p>Everything the club offers, every day of the week.</p><ul><li>Unlimited play, 7 days</li><li>2 academy lessons a month</li><li>Clubhouse &amp; spa access</li><li>Priority tee times</li></ul><button class="go">Choose Full Member</button></div>
+  <div class="plan"><h3>Family</h3><div class="pr">€540<small> / month</small></div><p>Two adults and kids under 16, with junior academy.</p><ul><li>Unlimited play for 2 adults</li><li>Junior academy included</li><li>Kids’ club on weekends</li></ul><button class="go">Choose Family</button></div>
+ </div>
+</div></section>
+
+<section id="hole"><div id="holeTrack"><div id="holeSticky">
+ <div id="holeCard">
+  <img class="base" id="holeImg" src="img/hole.webp" alt="Golf hole on the putting green" loading="lazy">
+  <canvas id="holeCanvas"></canvas>
+  <div class="txt">
+   <span class="tag">Final hole</span>
+   <h2 class="swap"><span class="a">One last putt.</span><span class="b">Hole in one. See you on the course.</span></h2>
+   <a class="lime-btn cta" href="#">Book a tee time <span class="arrow">↗</span></a>
+  </div>
+ </div>
+</div></div></section>
+
+<footer><div class="wrap">
+ <div class="fgrid">
+  <div><div class="logo"><i></i>GREENLINE</div><p style="margin-top:14px">Championship golf, pro academy and clubhouse, 20 minutes from Warsaw.</p></div>
+  <div><h4>Club</h4><a href="#about">About</a><a href="#explore">Academy</a><a href="#membership">Membership</a></div>
+  <div><h4>Contact</h4><p>+48 600 000 000<br>hello@greenline.golf<br>Golfowa 18, Warsaw</p></div>
+  <div><h4>Get tips &amp; tee-time deals</h4><div class="sub"><input placeholder="Your email"><button>→</button></div></div>
+ </div>
+ <div class="fbot"><span>© 2026 GREENLINE Golf Club</span><span>Demo concept · imagery generated with AI</span></div>
+</div></footer>
+
+<div id="ballLayer"><div id="ballShadow"></div><canvas id="ball" width="256" height="256" style="width:256px;height:256px"></canvas></div>
+
+<script>window.FRAMES=[[1,'frames/hero/001.webp'],[3,'frames/hero/003.webp'],[5,'frames/hero/005.webp'],[7,'frames/hero/007.webp'],[9,'frames/hero/009.webp'],[11,'frames/hero/011.webp'],[13,'frames/hero/013.webp'],[15,'frames/hero/015.webp'],[17,'frames/hero/017.webp'],[19,'frames/hero/019.webp'],[21,'frames/hero/021.webp'],[23,'frames/hero/023.webp'],[25,'frames/hero/025.webp'],[27,'frames/hero/027.webp'],[29,'frames/hero/029.webp'],[31,'frames/hero/031.webp'],[33,'frames/hero/033.webp'],[35,'frames/hero/035.webp'],[37,'frames/hero/037.webp'],[39,'frames/hero/039.webp'],[41,'frames/hero/041.webp'],[43,'frames/hero/043.webp'],[45,'frames/hero/045.webp'],[47,'frames/hero/047.webp'],[49,'frames/hero/049.webp'],[51,'frames/hero/051.webp'],[53,'frames/hero/053.webp'],[55,'frames/hero/055.webp'],[57,'frames/hero/057.webp'],[59,'frames/hero/059.webp'],[60,'frames/hero/060.webp'],[61,'frames/hero/061.webp'],[62,'frames/hero/062.webp'],[63,'frames/hero/063.webp'],[64,'frames/hero/064.webp'],[65,'frames/hero/065.webp'],[66,'frames/hero/066.webp'],[67,'frames/hero/067.webp'],[68,'frames/hero/068.webp'],[69,'frames/hero/069.webp'],[70,'frames/hero/070.webp'],[71,'frames/hero/071.webp'],[72,'frames/hero/072.webp'],[73,'frames/hero/073.webp'],[74,'frames/hero/074.webp'],[75,'frames/hero/075.webp'],[76,'frames/hero/076.webp'],[77,'frames/hero/077.webp'],[78,'frames/hero/078.webp'],[79,'frames/hero/079.webp'],[80,'frames/hero/080.webp'],[81,'frames/hero/081.webp'],[82,'frames/hero/082.webp'],[83,'frames/hero/083.webp'],[84,'frames/hero/084.webp'],[85,'frames/hero/085.webp'],[86,'frames/hero/086.webp'],[87,'frames/hero/087.webp'],[88,'frames/hero/088.webp'],[89,'frames/hero/089.webp'],[90,'frames/hero/090.webp'],[91,'frames/hero/091.webp'],[92,'frames/hero/092.webp'],[93,'frames/hero/093.webp'],[94,'frames/hero/094.webp'],[95,'frames/hero/095.webp'],[96,'frames/hero/096.webp'],[97,'frames/hero/097.webp'],[98,'frames/hero/098.webp'],[99,'frames/hero/099.webp'],[100,'frames/hero/100.webp'],[101,'frames/hero/101.webp'],[102,'frames/hero/102.webp'],[103,'frames/hero/103.webp'],[104,'frames/hero/104.webp'],[105,'frames/hero/105.webp'],[106,'frames/hero/106.webp'],[107,'frames/hero/107.webp'],[108,'frames/hero/108.webp'],[109,'frames/hero/109.webp'],[110,'frames/hero/110.webp'],[111,'frames/hero/111.webp'],[112,'frames/hero/112.webp'],[113,'frames/hero/113.webp'],[114,'frames/hero/114.webp'],[115,'frames/hero/115.webp'],[116,'frames/hero/116.webp'],[117,'frames/hero/117.webp'],[118,'frames/hero/118.webp'],[119,'frames/hero/119.webp'],[120,'frames/hero/120.webp'],[121,'frames/hero/121.webp']];window.HFRAMES=[[1,'frames/hole/001.webp'],[8,'frames/hole/008.webp'],[9,'frames/hole/009.webp'],[10,'frames/hole/010.webp'],[11,'frames/hole/011.webp'],[12,'frames/hole/012.webp'],[13,'frames/hole/013.webp'],[14,'frames/hole/014.webp'],[16,'frames/hole/016.webp'],[18,'frames/hole/018.webp'],[20,'frames/hole/020.webp'],[22,'frames/hole/022.webp'],[24,'frames/hole/024.webp'],[26,'frames/hole/026.webp'],[28,'frames/hole/028.webp'],[30,'frames/hole/030.webp'],[32,'frames/hole/032.webp'],[34,'frames/hole/034.webp'],[36,'frames/hole/036.webp'],[38,'frames/hole/038.webp'],[40,'frames/hole/040.webp'],[42,'frames/hole/042.webp'],[44,'frames/hole/044.webp'],[46,'frames/hole/046.webp'],[48,'frames/hole/048.webp'],[50,'frames/hole/050.webp'],[52,'frames/hole/052.webp'],[54,'frames/hole/054.webp'],[56,'frames/hole/056.webp'],[58,'frames/hole/058.webp'],[60,'frames/hole/060.webp'],[62,'frames/hole/062.webp'],[64,'frames/hole/064.webp'],[66,'frames/hole/066.webp'],[68,'frames/hole/068.webp'],[70,'frames/hole/070.webp'],[72,'frames/hole/072.webp'],[74,'frames/hole/074.webp'],[76,'frames/hole/076.webp'],[78,'frames/hole/078.webp'],[80,'frames/hole/080.webp'],[82,'frames/hole/082.webp'],[84,'frames/hole/084.webp'],[86,'frames/hole/086.webp'],[88,'frames/hole/088.webp'],[90,'frames/hole/090.webp'],[92,'frames/hole/092.webp'],[94,'frames/hole/094.webp'],[96,'frames/hole/096.webp'],[98,'frames/hole/098.webp'],[100,'frames/hole/100.webp']];</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const easeOut=t=>1-Math.pow(1-t,3);
+let W=innerWidth,H=innerHeight,MOB=W<900;
+
+/* ================= HERO MEDIA (frames when available) ================= */
+const IMG_W=1536,IMG_H=864;
+const TEE=[762,773],BALL_IMG_D=25;         // ball on tee, in source px
+const IMPACT=.48,FRAME_END=.8;                            // hero progress at which the club hits the ball
+function Seq(list,canvas,mapFn){this.items=list.map(([n,src])=>{const i=new Image();i.decoding='async';i.src=src;return{n,i}});this.cv=canvas;this.cx=canvas.getContext('2d');this.last=null;this.map=mapFn;this.max=list[list.length-1][0]}
+Seq.prototype.draw=function(n,force){let best=this.items[0];for(const it of this.items){if(it.n<=n+.5&&it.i.complete&&it.i.naturalWidth)best=it;if(it.n>n+.5)break}
+ const r=this.cv.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),w=Math.round(r.width*dpr),h=Math.round(r.height*dpr);
+ if(this.cv.width!==w||this.cv.height!==h){this.cv.width=w;this.cv.height=h;force=1}
+ if(best===this.last&&!force)return;this.last=best;const m=this.map({left:0,top:0,width:w,height:h});this.cx.clearRect(0,0,w,h);this.cx.drawImage(best.i,m.ox,m.oy,IMG_W*m.k,IMG_H*m.k)}
+const FRAMES=window.FRAMES||null,HFRAMES=window.HFRAMES||null;let heroSeq=null,holeSeq=null;
+const heroCv=$('#heroCanvas');
+if(FRAMES){$('#heroMedia').style.display='none';heroCv.style.display='block';heroSeq=new Seq(FRAMES,heroCv,r=>heroMap(r))}
+if(HFRAMES){holeSeq=new Seq(HFRAMES,$('#holeCanvas'),r=>holeCover(r))}
+function holeCover(r){if(!MOB)return coverMap(r);const k=r.height/IMG_H;return{k,ox:r.left+r.width/2-720*k,oy:r.top}}
+function heroMap(rect){if(!MOB)return coverMap(rect);const k=rect.width/700;return{k,ox:rect.left-675*k,oy:rect.top+rect.height-864*k-96}}
+function coverMap(rect){const k=Math.max(rect.width/IMG_W,rect.height/IMG_H);return{k,ox:rect.left+(rect.width-IMG_W*k)/2,oy:rect.top+(rect.height-IMG_H*k)/2}}
+function drawHero(p){if(heroSeq)heroSeq.draw(1+clamp(p/FRAME_END,0,1)*120)}
+
+/* ================= 3D BALL ================= */
+const ballCv=$('#ball');let renderer,scene,cam,mesh;const CV=256;
+function ballMaps(){
+ // height field of ~380 dimples evenly spread (Fibonacci sphere), equirectangular
+ const w=1024,h=512,N=380,hf=new Float32Array(w*h);const gr=Math.PI*(3-Math.sqrt(5));
+ const R=Math.sqrt(4/N)*.98; // angular radius of a dimple (radians)
+ const pts=[];for(let i=0;i<N;i++){const yv=1-(i+.5)/N*2,r=Math.sqrt(1-yv*yv),th=gr*i;pts.push([Math.cos(th)*r,yv,Math.sin(th)*r])}
+ for(const [px,py,pz] of pts){const lat=Math.asin(py),lon=Math.atan2(pz,px);
+  const cy=(.5-lat/Math.PI)*h,cx=(lon/(2*Math.PI)+.5)*w;const ry=R/Math.PI*h+2,rx=Math.min(w/2,ry/Math.max(Math.cos(lat),.05));
+  for(let y=Math.max(0,Math.floor(cy-ry));y<=Math.min(h-1,Math.ceil(cy+ry));y++){const la=(.5-(y+.5)/h)*Math.PI,sl=Math.sin(la),cl=Math.cos(la);
+   for(let xx=Math.floor(cx-rx);xx<=Math.ceil(cx+rx);xx++){const x=((xx%w)+w)%w;const lo=((x+.5)/w-.5)*2*Math.PI;
+    const dot=cl*Math.cos(lo)*px+sl*py+cl*Math.sin(lo)*pz;const ang=Math.acos(Math.min(1,dot));if(ang>=R)continue;
+    const t=ang/R;const v=-(Math.cos(t*Math.PI)*.5+.5);const k=y*w+x;if(v<hf[k])hf[k]=v}}}
+ // normal map + AO-tinted colour map
+ const nc=document.createElement('canvas');nc.width=w;nc.height=h;const nx=nc.getContext('2d'),nd=nx.createImageData(w,h);
+ const cc=document.createElement('canvas');cc.width=w;cc.height=h;const cx2=cc.getContext('2d'),cd=cx2.createImageData(w,h);
+ const S=3.2;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x,l=hf[y*w+(x-1+w)%w],r=hf[y*w+(x+1)%w],u=hf[Math.max(0,y-1)*w+x],d=hf[Math.min(h-1,y+1)*w+x];
+  let ax=(l-r)*S,ay=(d-u)*S,az=1;const m=Math.hypot(ax,ay,az);ax/=m;ay/=m;az/=m;
+  nd.data[k*4]=(ax*.5+.5)*255;nd.data[k*4+1]=(ay*.5+.5)*255;nd.data[k*4+2]=(az*.5+.5)*255;nd.data[k*4+3]=255;
+  const ao=242+hf[k]*20;cd.data[k*4]=ao;cd.data[k*4+1]=ao;cd.data[k*4+2]=ao-4;cd.data[k*4+3]=255}
+ nx.putImageData(nd,0,0);cx2.putImageData(cd,0,0);
+ const nt=new THREE.CanvasTexture(nc),ct=new THREE.CanvasTexture(cc);ct.encoding=THREE.sRGBEncoding;
+ [nt,ct].forEach(t=>{t.anisotropy=8;t.wrapS=THREE.RepeatWrapping});return{nt,ct}}
+function envTex(){const c=document.createElement('canvas');c.width=512;c.height=256;const x=c.getContext('2d');
+ const g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#5d9be2');g.addColorStop(.42,'#cfe3f7');g.addColorStop(.5,'#eef3ea');g.addColorStop(.56,'#a9b896');g.addColorStop(1,'#6f7f5c');x.fillStyle=g;x.fillRect(0,0,512,256);
+ const s=x.createRadialGradient(150,60,0,150,60,60);s.addColorStop(0,'rgba(255,252,240,1)');s.addColorStop(.25,'rgba(255,248,225,.8)');s.addColorStop(1,'rgba(255,248,225,0)');x.fillStyle=s;x.fillRect(0,0,512,256);
+ const t=new THREE.CanvasTexture(c);t.mapping=THREE.EquirectangularReflectionMapping;t.encoding=THREE.sRGBEncoding;return t}
+function initBall(){
+ const dpr=Math.min(2,devicePixelRatio||1);
+ renderer=new THREE.WebGLRenderer({canvas:ballCv,alpha:true,antialias:true});renderer.setPixelRatio(dpr);renderer.setSize(CV,CV,false);
+ renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
+ scene=new THREE.Scene();cam=new THREE.OrthographicCamera(-1.08,1.08,1.08,-1.08,.1,10);cam.position.z=5;
+ const pm=new THREE.PMREMGenerator(renderer);const env=pm.fromEquirectangular(envTex()).texture;scene.environment=env;
+ const {nt,ct}=ballMaps();
+ const mat=new THREE.MeshPhysicalMaterial({color:0xffffff,map:ct,normalMap:nt,normalScale:new THREE.Vector2(.9,.9),roughness:.5,metalness:0,clearcoat:.55,clearcoatRoughness:.22,envMapIntensity:.85});
+ mesh=new THREE.Mesh(new THREE.SphereGeometry(1,72,54),mat);scene.add(mesh);
+ const d=new THREE.DirectionalLight(0xfff3e0,1.6);d.position.set(-2.5,3,3.2);scene.add(d);
+ scene.add(new THREE.AmbientLight(0xffffff,.12));
+}
+const _ax=new THREE.Vector3(),_q=new THREE.Quaternion();
+function spin(dx,dy,radius){const d=Math.hypot(dx,dy);if(d<.01)return;_ax.set(dy,dx,0).normalize();_q.setFromAxisAngle(_ax,d/Math.max(radius,1));mesh.quaternion.premultiply(_q)}
+
+/* ================= PATH ================= */
+let HERO_LEN=0,STOPS=[],HOLE={};
+const ballSize=()=>clamp(W*.042,40,62);
+function docOf(el){const r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2+scrollY,w:r.width}}
+function teeScreen(){const m=heroMap($('#heroCard').getBoundingClientRect());return{x:m.ox+TEE[0]*m.k,y:m.oy+TEE[1]*m.k,d:BALL_IMG_D*m.k}}
+function holeMap(){return coverMap($('#holeCard .base').getBoundingClientRect())}
+const LIP=[[0,700],[505,700],[530,708],[560,714],[600,718],[650,722],[700,725],[760,727],[820,727],[880,724],[930,719],[970,712],[1000,704],[1020,694],[1035,682],[1060,688],[1536,688],[1536,864],[0,864]];
+const HOLE_GRASS=[420,690],HOLE_LIP=[640,627],HOLE_IN=[648,850],CUP_W=505;
+function layout(){
+ W=innerWidth;H=innerHeight;MOB=W<900;
+ document.documentElement.style.setProperty('--bs',ballSize()+'px');
+ HERO_LEN=$('#heroTrack').offsetHeight-H;
+ const hmEl=$('#heroMedia');if(MOB){const cr=$('#heroCard').getBoundingClientRect(),m=heroMap(cr);Object.assign(hmEl.style,{inset:'auto',left:(m.ox-cr.left)+'px',top:(m.oy-cr.top)+'px',width:1536*m.k+'px',height:864*m.k+'px',objectFit:'fill'})}else hmEl.removeAttribute('style');if(heroSeq)heroSeq.last=null;if(holeSeq)holeSeq.last=null;
+ // stops: {s: scroll at which ball rests, x,y: doc coords, d: diameter, hop}
+ const bs=ballSize();const S=[];
+ const endX=MOB?W*.5:W*.5,endY=H*.86;
+ S.push({s:HERO_LEN,x:endX,y:HERO_LEN+endY,d:bs*1.15,hop:0});
+ const spots=[['about',.5],['card',.52],['f0',.5],['plan',.5]];
+ spots.forEach(([k,c])=>{const el=$(`[data-spot="${k}"]`);const p=docOf(el);S.push({s:p.y-H*c,x:p.x,y:p.y,d:k==='f0'?28:k==='plan'?22:bs,hop:1,el})});
+ // hole: 3D ball drops into the top-left of the video card, the video ball takes over
+ const tr=$('#holeTrack'),trTop=tr.getBoundingClientRect().top+scrollY,pad=MOB?8:12;
+ HOLE={top:trTop,len:tr.offsetHeight-H,cardTop:trTop+pad};
+ HOLE.sEntry=HOLE.cardTop-H*.42;
+ const cw=W-pad*2,ch=H-pad*2,hm=holeCover({left:pad,top:0,width:cw,height:ch});
+ const ex=Math.max(hm.ox+190*hm.k,pad+40),dE=Math.min(330*hm.k,cw*.42);
+ S.push({s:HOLE.sEntry-H*.12,x:ex,y:HOLE.cardTop-dE*.62,d:dE,hop:1,hole:'above'});
+ S.push({s:HOLE.sEntry+H*.1,x:ex+dE*.15,y:HOLE.cardTop+dE*.9,d:dE*1.12,hop:0,hole:'enter'});
+ for(let i=1;i<S.length;i++)S[i].s=Math.max(S[i].s,S[i-1].s+H*.25);
+ STOPS=S;
+ // make sure page is long enough to reach last stop
+ const need=S[S.length-1].s+H*.3+H;document.body.style.minHeight=need+'px';
+}
+
+/* ================= FRAME ================= */
+const BL=$('#ballLayer');let px=null,py=null,lastT=performance.now(),done=false,wasVis=false;const lastQ=new THREE.Quaternion(2,0,0,0);
+function placeBall(x,y,d,shadowY,shadowA){
+ const k=d/(CV*.926);
+ ballCv.style.transform=`translate(${x-CV/2}px,${y-CV/2}px) scale(${k})`;
+ const sw=d*1.25,sk=sw/200;
+ $('#ballShadow').style.transform=`translate(${x-100}px,${shadowY-100}px) scale(${sk},${sk*.28})`;
+ $('#ballShadow').style.opacity=(y<-d||y>H+d)?0:shadowA;
+}
+function frame(now){
+ const dt=Math.min(.05,(now-lastT)/1000);lastT=now;
+ const s=scrollY;let x,y,d,sy,sa=.9,idle=0,hidden=0;
+ const hp=clamp(s/HERO_LEN,0,1);
+ drawHero(hp);
+ $('#scrollCue').style.opacity=1-clamp(hp*6,0,1);
+ if(s<=HERO_LEN){
+  const t0=teeScreen();
+  if(hp<IMPACT){x=t0.x;y=t0.y;d=t0.d;sy=y+d*.45;sa=0;hidden=FRAMES?1:0}
+  else{
+   const t=easeOut((hp-IMPACT)/(1-IMPACT)),E=STOPS[0];
+   const ax=MOB?W*.25:W*.3,ay=H*.16;
+   // quadratic bezier tee -> apex -> landing
+   const u=1-t;x=u*u*t0.x+2*u*t*ax+t*t*E.x;y=u*u*t0.y+2*u*t*ay+t*t*(E.y-HERO_LEN);
+   d=lerp(t0.d,E.d,t)+Math.sin(Math.PI*t)*E.d*1.4;
+   sy=lerp(t0.y,E.y-HERO_LEN,t)+d*.5;sa=lerp(.5,0,Math.sin(Math.PI*t))+(t>.95?.0:0);
+   idle=0;
+  }
+ }else{
+  let i=0;while(i<STOPS.length-1&&s>STOPS[i+1].s)i++;
+  const A=STOPS[i],B=STOPS[Math.min(i+1,STOPS.length-1)];
+  let t=B===A?1:clamp((s-A.s)/(B.s-A.s),0,1);
+  const hold=B.hole?0:.22;t=clamp((t-hold)/(1-hold*1.4),0,1);const te=B.hole==='in'||B.hole==='lip'?t:ease(t);
+  const dx=lerp(A.x,B.x,te),dy=lerp(A.y,B.y,te);
+  const hopH=B.hop?Math.min(240,Math.hypot(B.x-A.x,B.y-A.y)*.35+60):0;
+  x=dx;y=dy-Math.sin(Math.PI*te)*hopH-s;d=lerp(A.d,B.d,te);
+  sy=dy-s+d*.46;sa=.85*(1-Math.sin(Math.PI*te)*(B.hop?.85:0));
+  if(B.hole==='in'){sa*=1-te}
+  if(B.hole==='enter'||A.hole==='enter'){BL.style.clipPath=`inset(0 0 ${Math.max(0,H-(HOLE.cardTop-s))}px 0)`}else BL.style.clipPath='none';
+  if(t<=0||t>=1)idle=1;
+  // spots fill
+  STOPS.forEach((st,k)=>{if(st.el)st.el.classList.toggle('hit',(k===i&&t<.02)||(k===i+1&&t>.98))});
+  // features list highlight follows ball
+  const fl=$$('.fi');if(fl.length){const fi=STOPS.findIndex(q=>q.el&&q.el.dataset.spot==='f0');let on=2;if(i===fi||(i===fi-1&&t>.6))on=0;fl.forEach((e,j)=>e.classList.toggle('on',j===on))}
+ }
+ if(s>HOLE.sEntry+H*.1)hidden=1;
+ // hole video scrub
+ if(holeSeq){const s0=HOLE.sEntry-H*.12,s1=HOLE.sEntry+H*.1,s2=HOLE.top+HOLE.len;let n;
+  if(s<s0)n=1;else if(s<s1)n=8+(s-s0)/(s1-s0)*4;else n=12+clamp((s-s1)/(s2-s1-H*.15),0,1)*88;
+  holeSeq.draw(n);const isDone=n>=97;if(isDone!==done){done=isDone;$('#holeCard').classList.toggle('done',done)}}
+ if(px!==null)spin(x-px,(y+s)-(py),d/2);
+ if(idle)spin(30*dt,0,d/2);
+ px=x;py=y+s;
+ placeBall(x,y,d,sy,sa);ballCv.style.opacity=hidden?0:1;
+ const vis=!hidden&&y>-d&&y<H+d;
+ if(vis&&(!mesh.quaternion.equals(lastQ)||!wasVis)){renderer.render(scene,cam);lastQ.copy(mesh.quaternion)}
+ wasVis=vis;
+ requestAnimationFrame(frame);
+}
+
+/* ================= BOOT ================= */
+initBall();
+const relayout=()=>{layout()};
+addEventListener('resize',()=>{if(Math.abs(innerWidth-W)>40||!matchMedia('(hover:none)').matches)relayout()});
+addEventListener('load',relayout);
+$$('img').forEach(i=>i.addEventListener('load',relayout,{once:true}));
+document.fonts&&document.fonts.ready.then(relayout);
+layout();requestAnimationFrame(frame);
+</script>
+</body>
+</html>
