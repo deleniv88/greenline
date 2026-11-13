@@ -18,6 +18,9 @@ img{display:block;max-width:100%}
 .tag{display:inline-flex;align-items:center;padding:7px 14px;border:1px solid var(--line);border-radius:99px;font-size:12px;font-weight:500;color:#555}
 .h2{font-size:clamp(28px,3.4vw,44px);line-height:1.18;font-weight:500;letter-spacing:-.025em;text-wrap:balance}
 .h2 .g{color:var(--grey)}
+.h2 .w{color:#d6d8d3;transition:color .35s}
+.h2 .w.on{color:var(--ink)}
+.h2 .g .w.on{color:var(--grey)}
 .lime-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:99px;background:var(--lime);color:var(--ink);font-weight:600;font-size:14px;transition:.25s}
 .lime-btn:hover{background:var(--lime2)}
 .arrow{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center}
@@ -124,7 +127,7 @@ section{position:relative}
 
 /* ---------- HOLE ---------- */
 #hole{padding:0 0 12px}
-#holeTrack{height:300vh;position:relative}
+#holeTrack{height:190vh;position:relative}
 #holeSticky{position:sticky;top:0;height:100vh;padding:12px}
 #holeCard{position:relative;border-radius:var(--r);overflow:hidden;height:100%}
 #holeCard .base,#holeCanvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -138,19 +141,141 @@ section{position:relative}
 #holeCard .swap .b{opacity:0;transform:translateY(16px)}
 #holeCard.done .swap .a{opacity:0;transform:translateY(-16px)}
 #holeCard.done .swap .b{opacity:1;transform:none}
-#holeCard .cta{opacity:.0;transform:translateY(10px);transition:.6s .2s}
-#holeCard.done .cta{opacity:1;transform:none}
+#holeCard .cta,#holeCard .sub2{opacity:0;transform:translateY(10px);transition:.6s .2s}
+#holeCard.done .cta,#holeCard.done .sub2{opacity:1;transform:none}
+#holeCard .sub2{font-size:16px;line-height:1.55;max-width:400px;margin:-6px 0 22px;opacity:0;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.hform{position:absolute;right:32px;top:50%;transform:translateY(-50%);z-index:4;width:400px;padding:28px;border-radius:22px;background:rgba(255,255,255,.2);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid rgba(255,255,255,.45);color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.hform h3{font-size:26px;font-weight:500;letter-spacing:-.02em}
+.hform>p{font-size:13.5px;opacity:.9;margin:6px 0 18px}
+.hform .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.hform input,.hform select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.88);color:var(--ink);font-size:14px;outline:none;font-family:inherit;min-width:0}
+.hform input:focus,.hform select:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,244,50,.35)}
+.seg{display:flex;gap:6px;margin:10px 0;align-items:center}
+.seg button{flex:1;padding:10px 6px;border-radius:99px;border:1px solid rgba(255,255,255,.55);font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.1)}
+.seg button.on{background:#fff;color:var(--ink);border-color:#fff}
+.seg span{font-size:13px;opacity:.9;padding-left:4px}
+.hform .send{width:100%;justify-content:center;margin-top:12px;padding:15px}
+.hform .ok{display:none;margin-top:12px;font-size:13.5px;line-height:1.5}.hform .ok b{display:block;font-size:17px}
+.hform.sent .ok{display:block}.hform.sent .send{display:none}
 #plop{position:absolute;z-index:59;width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.9);opacity:0;pointer-events:none;transform:translate(-50%,-50%)}
 #plop.go{animation:plop .9s ease-out}
 @keyframes plop{0%{opacity:.9;width:10px;height:4px}100%{opacity:0;width:220px;height:60px}}
 
-/* ---------- FOOTER ---------- */
+
+/* ---------- v3 sections ---------- */
+.secHead{margin-bottom:40px}.secHead.c{text-align:center}
+.secHead .h2{margin-top:18px;max-width:880px}.secHead.c .h2{margin-left:auto;margin-right:auto}
+.lead{margin-top:16px;font-size:16px;line-height:1.6;color:#666;max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--line);text-align:left}
+.stats div{padding:26px 22px 4px}.stats div+div{border-left:1px solid var(--line)}
+.stats b{display:block;font-size:clamp(30px,3.4vw,46px);font-weight:500;letter-spacing:-.03em}
+.stats span{font-size:13.5px;color:#777}
+#course{padding:40px 0 0}
+.gal{position:relative}
+.galSticky{position:sticky;top:0;height:100vh;padding:12px}
+.galCard{position:relative;height:100%;border-radius:var(--r);overflow:hidden;background:#1d201d}
+.slide{position:absolute;inset:0;overflow:hidden;will-change:clip-path}
+.slide img,.slide video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;will-change:transform}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 45%,rgba(0,0,0,.62));pointer-events:none}
+.slide .shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:1}
+.cap{position:absolute;left:36px;bottom:36px;z-index:2;color:#fff;max-width:560px;transition:opacity .5s,transform .5s}
+.cap .tag{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);color:#fff;backdrop-filter:blur(8px)}
+.cap h3{font-size:clamp(40px,6vw,92px);font-weight:500;letter-spacing:-.04em;line-height:1;margin:16px 0 12px}
+.cap p{font-size:16px;line-height:1.55;opacity:.92;max-width:460px}
+.galNav{position:absolute;right:36px;bottom:40px;z-index:3;color:#fff;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-size:13px;font-weight:600;letter-spacing:.06em}
+.bars{display:flex;gap:6px}.bars i{width:38px;height:3px;border-radius:2px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.bars i::after{content:'';position:absolute;inset:0;background:var(--lime);transform-origin:0 0;transform:scaleX(var(--p,0))}
+#flyover{margin-top:0}
+.flyTrack{height:170vh;position:relative}
+.flySticky{position:sticky;top:0;height:100vh;padding:12px}
+.flyCard{position:relative;height:100%;border-radius:var(--r);overflow:hidden}
+.flyMedia{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;will-change:transform}
+.flyCard::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 55%,rgba(0,0,0,.45),rgba(0,0,0,.1))}
+.flyTxt{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;gap:18px}
+.flyTxt .tag{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);color:#fff}
+.flyTxt h2{font-size:clamp(36px,5.4vw,78px);font-weight:500;letter-spacing:-.035em;line-height:1.04}
+#play{padding:120px 0 110px}
+.fees{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fee{border-radius:20px;background:var(--soft);padding:30px 28px;display:flex;flex-direction:column;position:relative}
+.fee h3{font-size:20px;font-weight:600}.fee .pr{font-size:52px;font-weight:500;letter-spacing:-.03em;margin:18px 0 6px}
+.fee p{font-size:14px;color:#666;line-height:1.55}
+.fee ul{list-style:none;margin:20px 0 26px;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.fee li{display:flex;gap:10px;align-items:center}
+.fee li::before{content:'';width:18px;height:18px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/11px no-repeat;flex:none}
+.fee .go{margin-top:auto;display:flex;justify-content:center;padding:14px;border-radius:99px;border:1px solid #cfd0cc;font-weight:600;font-size:14px}
+.fee.hot{background:var(--lime)}.fee.hot p{color:#3c4a12}.fee.hot .go{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fee.hot li::before{background-color:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c6f432' stroke-width='3'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E")}
+.fee.hot .badge{background:#fff}
+.extras{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.extras div{padding:18px 20px;border:1px solid var(--line);border-radius:16px;font-size:14px;color:#555;display:flex;align-items:baseline;gap:10px}
+.extras b{font-size:20px;font-weight:600;color:var(--ink)}
+#academy{padding:30px 0 120px}
+.acad{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+.acPic{position:relative}.acPic img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px}
+.acBadge{position:absolute;left:18px;bottom:18px;padding:14px 18px;border-radius:16px;background:#fff;font-size:13px;color:#555}
+.acBadge b{display:block;font-size:24px;color:var(--ink);font-weight:600}
+.prog{margin-top:28px;border-top:1px solid var(--line)}
+.prog div{display:grid;grid-template-columns:1fr auto;gap:2px 20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.prog b{font-size:18px;font-weight:600}.prog span{font-size:13.5px;color:#777;grid-column:1}.prog em{font-style:normal;font-weight:600;grid-row:1/3;grid-column:2;align-self:center}
+#clubhouse{padding:20px 0 0}
+#reviews{padding:120px 0 100px}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{border-radius:20px;background:var(--soft);padding:28px}
+.rev .st{color:#e3b300;letter-spacing:2px}.rev p{font-size:17px;line-height:1.5;margin:14px 0 20px;letter-spacing:-.01em}
+.rev b{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}.rev b i{width:30px;height:30px;border-radius:50%}
+.events{margin-top:16px;border-radius:20px;background:var(--dark);color:#fff;padding:28px 30px}
+.evHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.evHead h3{font-size:20px;font-weight:600}.evHead a{color:var(--lime);font-size:14px;text-decoration:none}
+.ev{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-top:1px solid #2a2d2a}
+.ev .d{font-size:12px;color:#999;text-transform:uppercase;letter-spacing:.1em}.ev .d b{display:block;font-size:30px;color:#fff;font-weight:500;letter-spacing:-.02em}
+.ev div b{display:block;font-size:17px;font-weight:600}.ev div span{font-size:13px;color:#999}.ev em{font-style:normal;color:var(--lime);font-weight:600}
+#faq{padding:30px 0 120px}
+.faqW{display:grid;grid-template-columns:1fr 1.3fr;gap:60px}
+.qs details{border-bottom:1px solid var(--line);padding:20px 0}
+.qs summary{list-style:none;cursor:pointer;font-size:18px;font-weight:500;display:flex;justify-content:space-between;gap:20px}
+.qs summary::-webkit-details-marker{display:none}
+.qs summary::after{content:'+';width:30px;height:30px;border-radius:50%;background:var(--soft);display:grid;place-items:center;flex:none;transition:.3s}
+.qs details[open] summary::after{content:'–';background:var(--lime)}
+.qs p{margin-top:12px;font-size:15px;line-height:1.6;color:#666;max-width:560px}
+.fgrid{grid-template-columns:1.1fr 1fr 1.4fr}
+.map{border-radius:16px;overflow:hidden;height:220px}.map svg{width:100%;height:100%;display:block}
+#stickyBook{position:fixed;right:22px;bottom:22px;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.18);opacity:0;transform:translateY(20px);pointer-events:none;transition:.4s}
+#stickyBook.on{opacity:1;transform:none;pointer-events:auto}
+#skip{cursor:pointer}
+@media (max-width:900px){
+ .stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){border-left:0}.stats div{padding:20px 14px 4px}
+ .galSticky,.flySticky{padding:8px}
+ .cap{left:20px;right:20px;bottom:76px}.cap h3{font-size:44px}.cap p{font-size:14px}
+ .galNav{left:20px;right:auto;top:22px;bottom:auto;align-items:flex-start}
+ .cap{bottom:84px}
+ .fees,.revs{grid-template-columns:1fr}.extras{grid-template-columns:1fr 1fr}
+ .acad,.faqW{grid-template-columns:1fr;gap:30px}
+ #play,#reviews{padding:80px 0 70px}
+ .fgrid{grid-template-columns:1fr}
+ #stickyBook{left:16px;right:16px;bottom:14px;justify-content:center}
+ .htop{display:flex!important;left:auto;right:16px;top:70px}.htop p{display:none}.htop .pill-w{display:inline-flex!important;padding:8px 12px;font-size:12px}
+}
+
+/* ---------- FOOTER v4 ---------- */
+footer#contact{position:relative;margin:0;border-radius:0;padding:110px 0 0;background:#f2f1ec;color:var(--ink);overflow:hidden}
+.fbg{position:absolute;left:0;right:0;bottom:0;width:100%;height:64%;object-fit:cover;object-position:50% 62%;-webkit-mask-image:linear-gradient(transparent,rgba(0,0,0,.6) 30%,#000 60%);mask-image:linear-gradient(transparent,rgba(0,0,0,.6) 30%,#000 60%)}
+.fcols{position:relative;z-index:2;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.fcols h5{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:18px}
+.fcols a,.fcols p{display:block;font-size:15px;line-height:1.5;color:#232523;text-decoration:none;margin-bottom:12px}
+.fcols a:hover{color:#4a6b12}
+.fcols p.mt{margin-top:14px;color:#555}
+.logo.dk{color:var(--ink)}
+.fbrand h4{font-size:24px;font-weight:600;letter-spacing:-.03em;margin:20px 0 12px}
+.fbrand p{color:#666!important;max-width:420px;margin-bottom:22px!important}
+.fbrand .lime-btn{display:inline-flex;margin-bottom:22px}
+.fbrand small{display:block;font-size:12.5px;color:#888}
+.wordmark{position:relative;z-index:1;font-size:clamp(64px,17.6vw,320px);font-weight:600;letter-spacing:-.085em;line-height:.8;color:#fff;text-align:center;margin-top:clamp(120px,16vw,260px);white-space:nowrap;-webkit-mask-image:linear-gradient(#000 40%,transparent 100%);mask-image:linear-gradient(#000 40%,transparent 100%);opacity:.9;transform:translateY(8%)}
+/* ---------- FOOTER (old) ---------- */
 footer{background:var(--dark);color:#fff;margin:0 12px 12px;border-radius:var(--r);padding:56px 0 28px}
 .fgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:30px}
 footer h4{font-size:14px;font-weight:600;margin-bottom:16px}
 footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration:none;display:block}
 .sub{display:flex;gap:6px;padding:5px;border-radius:99px;background:#232623;margin-top:14px}
-.sub input{flex:1;padding:0 14px;font-size:13px;color:#fff;outline:none}
+.sub input{flex:1;min-width:0;padding:0 14px;font-size:13px;color:#fff;outline:none}
 .sub button{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink);font-weight:700}
 .fbot{display:flex;justify-content:space-between;margin-top:46px;padding-top:22px;border-top:1px solid #2a2d2a;font-size:12.5px;color:#7d807b}
 
@@ -184,6 +309,14 @@ footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration
  footer{margin:0 8px 8px}
  .fgrid{grid-template-columns:1fr 1fr}
  .fbot{flex-direction:column;gap:8px}
+ .fgrid{grid-template-columns:1fr!important}
+ .fcols{grid-template-columns:1fr 1fr;gap:28px}.fbrand{grid-column:1/3}
+ footer#contact{padding-top:70px}.fbg{height:30%}.wordmark{margin-top:110px}
+ .hform{left:12px;right:12px;width:auto;top:auto;bottom:12px;transform:translateY(30px);opacity:0;pointer-events:none;transition:.6s;padding:18px}
+ #holeCard.done .hform{transform:none;opacity:1;pointer-events:auto}
+ .hform>p{display:none}.hform h3{font-size:20px;margin-bottom:10px}
+ #holeCard.done .txt .sub2{display:none}
+ .fgrid>*{min-width:0}
 }
 </style>
 </head>
@@ -196,10 +329,10 @@ footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration
    <canvas id="heroCanvas"></canvas>
    <div class="hnav">
     <div class="logo"><i></i>GREENLINE</div>
-    <nav><a href="#about">The Club</a><a href="#explore">Academy</a><a href="#features">Course</a><a href="#membership">Membership</a><a href="#hole">Contact</a></nav>
+    <nav><a href="#course">Course</a><a href="#play">Play</a><a href="#academy">Academy</a><a href="#membership">Membership</a><a href="#clubhouse">Clubhouse</a><a href="#contact">Contact</a></nav>
     <div class="r"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><span class="ic l"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span></div>
    </div>
-   <div class="htop"><p>Championship 18 holes, a pro academy and a clubhouse — 20 minutes from the city.</p><span class="pill-w">Explore the course →</span></div>
+   <div class="htop"><p>Championship 18 holes, a pro academy and a clubhouse — 20 minutes from the city.</p><button class="pill-w" id="skip">Skip intro ↓</button></div>
    <div class="hbot">
     <h1>Your perfect round awaits.</h1>
     <div class="book"><span>Choose a date &amp; tee time</span><button>Book</button></div>
@@ -210,50 +343,101 @@ footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration
 </div>
 
 <section id="about"><div class="wrap">
- <span class="tag">About us</span>
- <h2 class="h2">Championship golf <span class="chip"><span class="spot" data-spot="about"></span>18 holes · par 72</span> a pro academy and a clubhouse — <span class="g">play more, play better, every single week.</span></h2>
- <div class="aboutRow">
-  <div class="ph"><img src="img/coach.webp" alt="Coach teaching a golfer" loading="lazy"><img src="img/cart.webp" alt="Golf cart and bag on the course" loading="lazy"></div>
-  <div class="icons">
-   <div class="on"><b><svg viewBox="0 0 24 24"><path d="M12 3v18M12 3l7 4-7 4"/></svg></b>Course</div>
-   <div><b><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21c1-4 3.5-6 7-6s6 2 7 6"/></svg></b>Coaching</div>
-   <div><b><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11"/></svg></b>Clubhouse</div>
-   <div><b><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></b>Pro shop</div>
-  </div>
+ <span class="tag">About the club</span>
+ <h2 class="h2">Championship golf <span class="chip"><span class="spot" data-spot="about"></span>18 holes · par 72</span> a pro academy and a clubhouse — <span class="g">20 minutes from the centre of Warsaw.</span></h2>
+ <div class="stats">
+  <div><b>18</b><span>holes, par 72</span></div><div><b>6,420 m</b><span>from the back tees</span></div><div><b>70 ha</b><span>of parkland &amp; lakes</span></div><div><b>4.9★</b><span>1,200+ Google reviews</span></div>
  </div>
 </div></section>
 
-<section id="explore"><div class="wrap">
- <div class="exHead"><span class="tag" style="justify-self:start">Explore</span><p>Training, membership and a championship course — <span>everything your game needs, in one place, all season long.</span></p></div>
- <div class="cards">
-  <div class="card"><img src="img/coach.webp" alt="Golf academy lesson" loading="lazy"><div class="top"><span class="tag">Academy</span></div><div class="lab">Golf Training Mastery</div></div>
-  <div class="card"><img src="img/walk.webp" alt="Members walking the fairway" loading="lazy"><div class="top"><span class="tag">Membership</span></div><div class="bub"><span class="av"><i></i><i></i><i></i></span>1.2k members</div><div class="lab">Exclusive Club Membership</div><span class="spot" data-spot="card"></span></div>
-  <div class="card"><img src="img/cart.webp" alt="Golf cart on the course" loading="lazy"><div class="top"><span class="tag">Pro shop</span></div><div class="lab">Golf Gear &amp; Carts</div></div>
+<section id="course"><div class="wrap secHead">
+ <span class="tag">The course</span>
+ <h2 class="h2">Eighteen holes. <span class="g">Four you’ll never forget.</span></h2>
+ <p class="lead">Designed around old pines, two lakes and natural dunes — every hole plays differently with the wind.</p>
+</div>
+<div class="gal" id="galHoles" data-n="4"><div class="galSticky"><div class="galCard">
+ <div class="slide"><img src="img/h1.webp" alt="Hole 3 fairway lined with pines" loading="lazy"><video class="sv" muted playsinline preload="auto" src="video/h1.mp4"></video><div class="cap"><span class="tag">Hole 03 · Par 4 · 412 m</span><h3>The Long Pines</h3><p>A straight drive between ancient pines. Find the fairway and the green opens up.</p></div></div>
+ <div class="slide"><img src="img/h2.webp" alt="Island green par 3" loading="lazy"><video class="sv" muted playsinline preload="metadata" src="video/h2.mp4"></video><div class="cap"><span class="tag">Hole 07 · Par 3 · 156 m</span><h3>The Island</h3><p>Our signature hole — one shot over water to a green with nowhere to hide.</p></div></div>
+ <div class="slide"><img src="img/h3.webp" alt="Dogleg par 5 from above" loading="lazy"><video class="sv" muted playsinline preload="metadata" src="video/h3.mp4"></video><div class="cap"><span class="tag">Hole 12 · Par 5 · 528 m</span><h3>The Bend</h3><p>A dogleg left around the trees. Cut the corner for eagle, or play it safe for par.</p></div></div>
+ <div class="slide"><img src="img/h4.webp" alt="18th green and clubhouse at sunset" loading="lazy"><video class="sv" muted playsinline preload="metadata" src="video/h4.mp4"></video><div class="cap"><span class="tag">Hole 18 · Par 4 · 398 m</span><h3>Home</h3><p>Finish in front of the clubhouse terrace — with an audience and a cold drink waiting.</p></div></div>
+ <div class="galNav"><span class="cnt">01 / 04</span><div class="bars"><i></i><i></i><i></i><i></i></div></div>
+</div></div></div>
+</section>
+
+<section id="flyover"><div class="flyTrack"><div class="flySticky"><div class="flyCard">
+ <img class="flyMedia" src="img/h3.webp" alt="Drone flyover of the course" loading="lazy">
+ <div class="flyTxt"><span class="tag">Drone flyover</span><h2>See the whole course<br>before you tee off.</h2><a class="lime-btn" href="#play">Book a round <span class="arrow">↗</span></a></div>
+</div></div></div></section>
+
+<section id="play"><div class="wrap">
+ <div class="secHead c"><span class="tag">Play today</span><h2 class="h2">No membership needed. <span class="g">Just pick a time.</span></h2></div>
+ <div class="fees">
+  <div class="fee"><h3>9 holes</h3><div class="pr">€45</div><p>About 2 hours. Perfect for an evening or a first visit.</p><ul><li>Range balls included</li><li>Mon–Sun, all day</li></ul><button class="go">Book 9 holes</button></div>
+  <div class="fee hot"><span class="badge"><span class="spot" data-spot="play" style="--bs:22px;border-color:#111"></span>Most booked</span><h3>18 holes</h3><div class="pr">€79</div><p>The full championship round, about 4 hours.</p><ul><li>Range balls included</li><li>Yardage book</li><li>10% off lunch at the terrace</li></ul><button class="go">Book 18 holes</button></div>
+  <div class="fee"><h3>Twilight</h3><div class="pr">€39</div><p>Play as many holes as the light allows, from 17:00.</p><ul><li>Unlimited holes until dark</li><li>Apr–Sep</li></ul><button class="go">Book twilight</button></div>
  </div>
+ <div class="extras"><div><b>€25</b>Club rental set</div><div><b>€30</b>Electric cart</div><div><b>€6</b>Range bucket</div><div><b>Free</b>Parking &amp; lockers</div></div>
 </div></section>
 
-<section id="features"><div class="wrap feat">
+<section id="academy"><div class="wrap acad">
+ <div class="acPic"><img src="img/coach.webp" alt="Coach teaching a golfer" loading="lazy"><div class="acBadge"><b>2,300+</b>golfers taught since 2019</div></div>
  <div>
-  <span class="tag">The course</span>
-  <div class="flist" style="margin-top:26px">
-   <div class="fi"><span class="ln"></span><span class="spot" data-spot="f0"></span>Game-improving academy</div>
-   <div class="fi"><span class="ln"></span><span class="spot"></span>Championship 18 holes</div>
-   <div class="fi on"><span class="ln"></span><span class="spot"></span>Pro-level practice range</div>
-   <div class="fi"><span class="ln"></span><span class="spot"></span>Clubhouse &amp; spa</div>
+  <span class="tag">Academy</span>
+  <h2 class="h2" style="margin-top:18px">Learn from <span class="spot" data-spot="academy"></span> PGA pros. <span class="g">From your first swing to your first handicap.</span></h2>
+  <div class="prog">
+   <div><b>Start golf</b><span>4 lessons · clubs included</span><em>€149</em></div>
+   <div><b>Green card course</b><span>6 lessons + exam · on-course play</span><em>€290</em></div>
+   <div><b>Private coaching</b><span>60 min · video swing analysis</span><em>€70</em></div>
+   <div><b>Junior academy</b><span>Ages 6–16 · weekends</span><em>€95 / mo</em></div>
   </div>
- </div>
- <div class="fpic">
-  <img class="a" src="img/aerial.webp" alt="Aerial view of the course" loading="lazy">
-  <div><img class="b" src="img/walk.webp" alt="Members on the course" loading="lazy"><div class="quote">“The best-kept greens within an hour of the city. I play here every Saturday.”<b>Mark Nowak · member since 2021</b></div></div>
+  <a class="lime-btn" href="#contact" style="margin-top:26px">Book a free trial lesson <span class="arrow">↗</span></a>
  </div>
 </div></section>
 
 <section id="membership"><div class="wrap">
- <div class="mHead"><span class="tag">Membership</span><h2 class="h2">Choose how <span class="g">you play</span></h2></div>
+ <div class="mHead"><span class="tag">Membership</span><h2 class="h2">Play as much <span class="g">as you like.</span></h2></div>
  <div class="plans">
   <div class="plan"><h3>Weekday</h3><div class="pr">€190<small> / month</small></div><p>For players who love quiet mornings on the course.</p><ul><li>Mon–Fri unlimited play</li><li>Practice range access</li><li>10% off in the pro shop</li></ul><button class="go">Choose Weekday</button></div>
   <div class="plan feat2"><span class="badge"><span class="spot" data-spot="plan" style="--bs:22px;border-color:#111"></span>Most popular</span><h3>Full Member</h3><div class="pr">€320<small> / month</small></div><p>Everything the club offers, every day of the week.</p><ul><li>Unlimited play, 7 days</li><li>2 academy lessons a month</li><li>Clubhouse &amp; spa access</li><li>Priority tee times</li></ul><button class="go">Choose Full Member</button></div>
   <div class="plan"><h3>Family</h3><div class="pr">€540<small> / month</small></div><p>Two adults and kids under 16, with junior academy.</p><ul><li>Unlimited play for 2 adults</li><li>Junior academy included</li><li>Kids’ club on weekends</li></ul><button class="go">Choose Family</button></div>
+ </div>
+</div></section>
+
+<section id="clubhouse"><div class="wrap secHead">
+ <span class="tag">Clubhouse</span>
+ <h2 class="h2">The 19th hole. <span class="g">Stay after your round.</span></h2>
+</div>
+<div class="gal" id="galClub" data-n="3"><div class="galSticky"><div class="galCard">
+ <div class="slide"><img src="img/rest.webp" alt="Clubhouse restaurant terrace" loading="lazy"><div class="cap"><span class="tag">Restaurant · open daily 8–22</span><h3>The Terrace</h3><p>Seasonal lunch and dinner with a view over the 18th green. Open to non-members.</p></div></div>
+ <div class="slide"><img src="img/spa.webp" alt="Spa with indoor pool" loading="lazy"><div class="cap"><span class="tag">Spa · members &amp; day passes</span><h3>Spa &amp; Pool</h3><p>Indoor pool, sauna and massage — the best way to recover after 18 holes.</p></div></div>
+ <div class="slide"><img src="img/shop.webp" alt="Golf pro shop" loading="lazy"><div class="cap"><span class="tag">Pro shop · club fitting</span><h3>Pro Shop</h3><p>Clubs, balls and apparel from the top brands, plus a 3D club-fitting studio.</p></div></div>
+ <div class="galNav"><span class="cnt">01 / 03</span><div class="bars"><i></i><i></i><i></i></div></div>
+</div></div></div>
+</section>
+
+<section id="reviews"><div class="wrap">
+ <div class="secHead c"><span class="tag">Reviews &amp; events</span><h2 class="h2">Rated <span class="spot" data-spot="reviews"></span> 4.9 by golfers. <span class="g">Here’s why.</span></h2></div>
+ <div class="revs">
+  <div class="rev"><div class="st">★★★★★</div><p>“The best-kept greens within an hour of Warsaw. I play here every Saturday.”</p><b><i style="background:#d9b99b"></i>Mark Nowak · member</b></div>
+  <div class="rev"><div class="st">★★★★★</div><p>“Took the Start golf course with zero experience — four lessons later I played my first nine holes.”</p><b><i style="background:#8aa17a"></i>Anna K. · academy</b></div>
+  <div class="rev"><div class="st">★★★★★</div><p>“The island green alone is worth the trip. Lunch on the terrace afterwards was perfect.”</p><b><i style="background:#6b7d93"></i>James R. · visitor</b></div>
+ </div>
+ <div class="events">
+  <div class="evHead"><h3>Upcoming tournaments</h3><a href="#contact">All events →</a></div>
+  <div class="ev"><span class="d"><b>06</b>Dec</span><div><b>Winter Scramble</b><span>Teams of 4 · open to guests</span></div><em>€60</em></div>
+  <div class="ev"><span class="d"><b>18</b>Apr</span><div><b>Season Opener Stableford</b><span>Handicap up to 36</span></div><em>€45</em></div>
+  <div class="ev"><span class="d"><b>14</b>Jun</span><div><b>GREENLINE Open</b><span>Club championship · members</span></div><em>Free</em></div>
+ </div>
+</div></section>
+
+<section id="faq"><div class="wrap faqW">
+ <div><span class="tag">FAQ</span><h2 class="h2" style="margin-top:18px">Good to know <span class="spot" data-spot="faq"></span> <span class="g">before your first visit.</span></h2></div>
+ <div class="qs">
+  <details open><summary>Can beginners play on the course?</summary><p>Yes. Start with 9 holes or the practice range, or book the Start golf course — clubs are included.</p></details>
+  <details><summary>Do I need my own clubs?</summary><p>No. Rental sets are €25 and include a bag, balls and tees.</p></details>
+  <details><summary>Is there a dress code?</summary><p>Smart-casual golf wear: collared shirt, no denim, soft-spike shoes. Rental shoes are available.</p></details>
+  <details><summary>How do I book a tee time?</summary><p>Online in under a minute, or call the reception. Weekends book up 3–5 days ahead.</p></details>
+  <details><summary>Can I come just for the restaurant or spa?</summary><p>The Terrace is open to everyone. Spa day passes are €35.</p></details>
  </div>
 </div></section>
 
@@ -264,20 +448,33 @@ footer p,footer a{font-size:13.5px;color:#a6a8a4;line-height:1.9;text-decoration
   <div class="txt">
    <span class="tag">Final hole</span>
    <h2 class="swap"><span class="a">One last putt.</span><span class="b">Hole in one. See you on the course.</span></h2>
-   <a class="lime-btn cta" href="#">Book a tee time <span class="arrow">↗</span></a>
+   <p class="sub2">Join GREENLINE and play every day of the week — unlimited rounds, academy lessons and the clubhouse.</p>
+   <a class="lime-btn cta" href="#membership">Become a member <span class="arrow">↗</span></a>
   </div>
+  <form class="hform" id="hform">
+   <h3>Book a tee time</h3><p>We’ll confirm your slot within 15 minutes.</p>
+   <div class="row"><input required placeholder="Full name"><input required type="tel" placeholder="Phone"></div>
+   <div class="row"><input required type="date" aria-label="Date"><select aria-label="Time"><option>Morning</option><option>Midday</option><option>Afternoon</option><option>Twilight</option></select></div>
+   <div class="seg" data-name="round"><button type="button" class="on">18 holes</button><button type="button">9 holes</button><button type="button">Twilight</button></div>
+   <div class="seg" data-name="players"><button type="button">1</button><button type="button" class="on">2</button><button type="button">3</button><button type="button">4</button><span>players</span></div>
+   <button class="lime-btn send" type="submit">Request tee time <span class="arrow">↗</span></button>
+   <div class="ok"><b>Thank you!</b>This is a demo — on the live site the request goes straight to the reception.</div>
+  </form>
  </div>
 </div></div></section>
 
-<footer><div class="wrap">
- <div class="fgrid">
-  <div><div class="logo"><i></i>GREENLINE</div><p style="margin-top:14px">Championship golf, pro academy and clubhouse, 20 minutes from Warsaw.</p></div>
-  <div><h4>Club</h4><a href="#about">About</a><a href="#explore">Academy</a><a href="#membership">Membership</a></div>
-  <div><h4>Contact</h4><p>+48 600 000 000<br>hello@greenline.golf<br>Golfowa 18, Warsaw</p></div>
-  <div><h4>Get tips &amp; tee-time deals</h4><div class="sub"><input placeholder="Your email"><button>→</button></div></div>
+<footer id="contact">
+ <img class="fbg" src="img/foot.webp" alt="" aria-hidden="true" loading="lazy">
+ <div class="wrap fcols">
+  <div class="fbrand"><div class="logo dk"><i></i>GREENLINE</div><h4>Your perfect round awaits.</h4><p>Championship 18 holes, a pro academy and a clubhouse with a terrace and spa — 20 minutes from the centre of Warsaw.</p><a class="lime-btn" href="#hole">Book a tee time <span class="arrow">↗</span></a><small>© 2026 GREENLINE Golf Club · Demo concept, imagery generated with AI</small></div>
+  <div><h5>Menu</h5><a href="#course">Course</a><a href="#play">Play today</a><a href="#academy">Academy</a><a href="#membership">Membership</a><a href="#clubhouse">Clubhouse</a></div>
+  <div><h5>Visit</h5><p>Golfowa 18<br>05-500 Warsaw</p><a href="#">+48 600 000 000</a><a href="#">hello@greenline.golf</a><p class="mt">Course: sunrise – sunset<br>Terrace: 8:00 – 22:00</p></div>
+  <div><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Tournament calendar</a><a href="#">Privacy policy</a></div>
  </div>
- <div class="fbot"><span>© 2026 GREENLINE Golf Club</span><span>Demo concept · imagery generated with AI</span></div>
-</div></footer>
+ <div class="wordmark" aria-hidden="true">GREENLINE</div>
+</footer>
+
+<a id="stickyBook" class="lime-btn" href="#play">Book a tee time <span class="arrow">↗</span></a>
 
 <div id="ballLayer"><div id="ballShadow"></div><canvas id="ball" width="256" height="256" style="width:256px;height:256px"></canvas></div>
 
@@ -348,10 +545,10 @@ function initBall(){
  scene.add(new THREE.AmbientLight(0xffffff,.12));
 }
 const _ax=new THREE.Vector3(),_q=new THREE.Quaternion();
-function spin(dx,dy,radius){const d=Math.hypot(dx,dy);if(d<.01)return;_ax.set(dy,dx,0).normalize();_q.setFromAxisAngle(_ax,d/Math.max(radius,1));mesh.quaternion.premultiply(_q)}
+function spin(dx,dy,radius){const d=Math.min(160,Math.hypot(dx,dy));if(d<.01)return;_ax.set(dy,dx,0).normalize();_q.setFromAxisAngle(_ax,d/Math.max(radius,1));mesh.quaternion.premultiply(_q)}
 
 /* ================= PATH ================= */
-let HERO_LEN=0,STOPS=[],HOLE={};
+let HERO_LEN=0,STOPS=[],HOLE={},GALS=[],FLY={},DIVE={};
 const ballSize=()=>clamp(W*.042,40,62);
 function docOf(el){const r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2+scrollY,w:r.width}}
 function teeScreen(){const m=heroMap($('#heroCard').getBoundingClientRect());return{x:m.ox+TEE[0]*m.k,y:m.oy+TEE[1]*m.k,d:BALL_IMG_D*m.k}}
@@ -362,13 +559,24 @@ function layout(){
  W=innerWidth;H=innerHeight;MOB=W<900;
  document.documentElement.style.setProperty('--bs',ballSize()+'px');
  HERO_LEN=$('#heroTrack').offsetHeight-H;
+ $$('.gal').forEach(g=>g.style.height=(+g.dataset.n+.4)*H+'px');
  const hmEl=$('#heroMedia');if(MOB){const cr=$('#heroCard').getBoundingClientRect(),m=heroMap(cr);Object.assign(hmEl.style,{inset:'auto',left:(m.ox-cr.left)+'px',top:(m.oy-cr.top)+'px',width:1536*m.k+'px',height:864*m.k+'px',objectFit:'fill'})}else hmEl.removeAttribute('style');if(heroSeq)heroSeq.last=null;if(holeSeq)holeSeq.last=null;
  // stops: {s: scroll at which ball rests, x,y: doc coords, d: diameter, hop}
  const bs=ballSize();const S=[];
  const endX=MOB?W*.5:W*.5,endY=H*.86;
  S.push({s:HERO_LEN,x:endX,y:HERO_LEN+endY,d:bs*1.15,hop:0});
- const spots=[['about',.5],['card',.52],['f0',.5],['plan',.5]];
- spots.forEach(([k,c])=>{const el=$(`[data-spot="${k}"]`);const p=docOf(el);S.push({s:p.y-H*c,x:p.x,y:p.y,d:k==='f0'?28:k==='plan'?22:bs,hop:1,el})});
+ const spots=[['about',0],['play',0],['academy',0],['plan',0],['reviews',1],['faq',0]];
+ const gp=MOB?8:12;
+ const gTop=$('#galHoles').getBoundingClientRect().top+scrollY+gp;
+ const ftr=$('.flyTrack').getBoundingClientRect(),fBot=ftr.bottom+scrollY-gp;
+ DIVE={gTop,fBot};
+ spots.forEach(([k,j])=>{const el=$(`[data-spot="${k}"]`);const p=docOf(el);
+  if(k==='play'){const dB=bs*1.6;
+   S.push({s:gTop-H*.62,x:W*.5,y:gTop+dB*.8,d:dB,hop:0,dive:1});
+   S.push({s:fBot-H*.55,x:W*.5,y:fBot-dB*.8,d:dB,hop:0,jump:1,emerge:1});}
+  S.push({s:p.y-H*.5,x:p.x,y:p.y,d:el.offsetWidth||bs,hop:j?0:1,jump:j,el})});
+ GALS=$$('.gal').map(g=>({el:g,top:g.getBoundingClientRect().top+scrollY,n:+g.dataset.n,sl:[...g.querySelectorAll('.slide')],bars:[...g.querySelectorAll('.bars i')],cnt:g.querySelector('.cnt')}));
+ const ft=$('.flyTrack');FLY={top:ft.getBoundingClientRect().top+scrollY,len:ft.offsetHeight-H};
  // hole: 3D ball drops into the top-left of the video card, the video ball takes over
  const tr=$('#holeTrack'),trTop=tr.getBoundingClientRect().top+scrollY,pad=MOB?8:12;
  HOLE={top:trTop,len:tr.offsetHeight-H,cardTop:trTop+pad};
@@ -384,7 +592,7 @@ function layout(){
 }
 
 /* ================= FRAME ================= */
-const BL=$('#ballLayer');let px=null,py=null,lastT=performance.now(),done=false,wasVis=false;const lastQ=new THREE.Quaternion(2,0,0,0);
+const BL=$('#ballLayer');let holeT0=null,lastSide=null,px=null,py=null,lastT=performance.now(),done=false,wasVis=false;const lastQ=new THREE.Quaternion(2,0,0,0);
 function placeBall(x,y,d,shadowY,shadowA){
  const k=d/(CV*.926);
  ballCv.style.transform=`translate(${x-CV/2}px,${y-CV/2}px) scale(${k})`;
@@ -414,13 +622,20 @@ function frame(now){
   let i=0;while(i<STOPS.length-1&&s>STOPS[i+1].s)i++;
   const A=STOPS[i],B=STOPS[Math.min(i+1,STOPS.length-1)];
   let t=B===A?1:clamp((s-A.s)/(B.s-A.s),0,1);
-  const hold=B.hole?0:.22;t=clamp((t-hold)/(1-hold*1.4),0,1);const te=B.hole==='in'||B.hole==='lip'?t:ease(t);
-  const dx=lerp(A.x,B.x,te),dy=lerp(A.y,B.y,te);
-  const hopH=B.hop?Math.min(240,Math.hypot(B.x-A.x,B.y-A.y)*.35+60):0;
-  x=dx;y=dy-Math.sin(Math.PI*te)*hopH-s;d=lerp(A.d,B.d,te);
+  if(B.jump){t=clamp((s-A.s)/(B.s-A.s),0,1)}
+  const hold=B.hole||B.jump||B.dive?0:A.emerge?.05:.22;t=clamp((t-hold)/(1-hold*1.4),0,1);const te=B.dive?t*t:A.emerge?easeOut(t):B.hole==='in'||B.hole==='lip'?t:ease(t);
+  let dx=lerp(A.x,B.x,te),dy=lerp(A.y,B.y,te);let dd=lerp(A.d,B.d,te);
+  if(B.jump){const P=te<.5?A:B;dx=P.x;dy=P.y;dd=P.d;if((te<.5)!==lastSide){px=null;lastSide=te<.5}}
+  const hopH=A.emerge?Math.min(H*.35,320):B.hop?Math.min(240,Math.hypot(B.x-A.x,B.y-A.y)*.35+60):0;
+  x=dx;y=dy-Math.sin(Math.PI*te)*hopH-s;d=dd;
   sy=dy-s+d*.46;sa=.85*(1-Math.sin(Math.PI*te)*(B.hop?.85:0));
   if(B.hole==='in'){sa*=1-te}
-  if(B.hole==='enter'||A.hole==='enter'){BL.style.clipPath=`inset(0 0 ${Math.max(0,H-(HOLE.cardTop-s))}px 0)`}else BL.style.clipPath='none';
+  if(B.hole==='enter'||A.hole==='enter'){BL.style.clipPath=`inset(0 0 ${Math.max(0,H-(HOLE.cardTop-s))}px 0)`}
+  else if(B.dive){BL.style.clipPath=`inset(0 0 ${clamp(H-(DIVE.gTop-s),0,H)}px 0)`}
+  else if(A.emerge){BL.style.clipPath=`inset(${clamp(DIVE.fBot-s,0,H)}px 0 0 0)`}
+  else BL.style.clipPath='none';
+  if(A.dive&&B.emerge)hidden=1;
+  if(B.dive||A.emerge)sa=0;
   if(t<=0||t>=1)idle=1;
   // spots fill
   STOPS.forEach((st,k)=>{if(st.el)st.el.classList.toggle('hit',(k===i&&t<.02)||(k===i+1&&t>.98))});
@@ -429,9 +644,20 @@ function frame(now){
  }
  if(s>HOLE.sEntry+H*.1)hidden=1;
  // hole video scrub
- if(holeSeq){const s0=HOLE.sEntry-H*.12,s1=HOLE.sEntry+H*.1,s2=HOLE.top+HOLE.len;let n;
-  if(s<s0)n=1;else if(s<s1)n=8+(s-s0)/(s1-s0)*4;else n=12+clamp((s-s1)/(s2-s1-H*.15),0,1)*88;
+ if(holeSeq){const s0=HOLE.sEntry-H*.12,s1=HOLE.sEntry+H*.1;let n;
+  if(s<s0){n=1;holeT0=null}else if(s<s1&&holeT0===null)n=8+(s-s0)/(s1-s0)*4;else{if(holeT0===null)holeT0=now;n=Math.min(100,12+(now-holeT0)/1000*24)}
   holeSeq.draw(n);const isDone=n>=97;if(isDone!==done){done=isDone;$('#holeCard').classList.toggle('done',done)}}
+ // galleries
+ GALS.forEach(g=>{const p=clamp((s-g.top)/H-.2,0,g.n-1);const k=Math.min(g.n-1,Math.floor(p+.5));
+  g.sl.forEach((sl,j)=>{const r=j===0?1:clamp(p-(j-1),0,1),e=ease(r);sl.style.clipPath=j===0?'none':`inset(${(1-e)*100}% 0 0 0)`;
+   const after=clamp(p-j,0,1);const tf=`scale(${(1.18-.18*e+.06*after).toFixed(4)}) translateY(${(-after*3).toFixed(2)}%)`;sl.querySelectorAll('img,video').forEach(m=>m.style.transform=tf);
+   const c=sl.querySelector('.cap');const v=clamp(1-Math.abs(p-j)*2.4,0,1);c.style.opacity=v;c.style.transform=`translateY(${((1-v)*24).toFixed(1)}px)`});
+  {const vs=g.sl.map(x=>x.querySelector('video'));if(vs[0]){const vis=s>g.top-H*.5&&s<g.top+(g.n+.4)*H-H*.3;const act=vis?k:-1;
+   if(act!==g.act){g.act=act;vs.forEach((v,j)=>{if(!v)return;if(j===act){try{v.currentTime=0}catch(e){}const pr=v.play();pr&&pr.catch&&pr.catch(()=>{})}else v.pause();if(j===act+1)v.preload='auto'})}}}
+  g.bars.forEach((b,j)=>b.style.setProperty('--p',clamp(p-j+1,0,1)));g.cnt.textContent=String(k+1).padStart(2,'0')+' / '+String(g.n).padStart(2,'0')});
+ // flyover
+ {const p=clamp((s-FLY.top+H)/(FLY.len+H*2),0,1);$('.flyMedia').style.transform=`scale(${(1.35-.3*p).toFixed(4)}) translate(${(-4+8*p).toFixed(2)}%,${(3-6*p).toFixed(2)}%)`}
+ $('#stickyBook').classList.toggle('on',s>HERO_LEN*.95&&s<HOLE.sEntry-H*.4);
  if(px!==null)spin(x-px,(y+s)-(py),d/2);
  if(idle)spin(30*dt,0,d/2);
  px=x;py=y+s;
@@ -443,13 +669,25 @@ function frame(now){
 }
 
 /* ================= BOOT ================= */
+// split headings into words for scroll fill
+const FILL=$$('.h2').map(h=>{const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const parts=c.textContent.split(/(\s+)/);const f=document.createDocumentFragment();parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p))f.appendChild(document.createTextNode(p));else{const sp=document.createElement('span');sp.className='w';sp.textContent=p;f.appendChild(sp)}});c.replaceWith(f)}else if(c.nodeType===1&&!c.classList.contains('chip')&&!c.classList.contains('spot'))walk(c)})};walk(h);return{h,ws:[...h.querySelectorAll('.w')]}});
+function fillHeadings(){FILL.forEach(({h,ws})=>{const r=h.getBoundingClientRect();const p=clamp((H*.95-r.top)/(H*.95-H*.62),0,1);const n=Math.round(p*ws.length);ws.forEach((w,i)=>w.classList.toggle('on',i<n))})}
+addEventListener('scroll',fillHeadings,{passive:true});
+// count-up stats
+{const st=$('.stats');const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();st.classList.add('in');
+ st.querySelectorAll('.num').forEach(el=>{const to=+el.dataset.to,dec=+(el.dataset.dec||0),t0=performance.now(),dur=1600;
+  const step=n=>{const t=Math.min(1,(n-t0)/dur),v=to*(1-Math.pow(1-t,4));el.textContent=dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');if(t<1)requestAnimationFrame(step)};requestAnimationFrame(step)})},{threshold:.35});io.observe(st)}
+$$('.seg').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{g.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))}));
+$('#hform').onsubmit=e=>{e.preventDefault();$('#hform').classList.add('sent')};
+{const d=$('#hform input[type=date]');const t=new Date(Date.now()+864e5);d.value=t.toISOString().slice(0,10)}
+$('#skip').onclick=()=>scrollTo({top:HERO_LEN+2,behavior:'smooth'});
 initBall();
 const relayout=()=>{layout()};
 addEventListener('resize',()=>{if(Math.abs(innerWidth-W)>40||!matchMedia('(hover:none)').matches)relayout()});
 addEventListener('load',relayout);
 $$('img').forEach(i=>i.addEventListener('load',relayout,{once:true}));
 document.fonts&&document.fonts.ready.then(relayout);
-layout();requestAnimationFrame(frame);
+layout();fillHeadings();requestAnimationFrame(frame);
 </script>
 </body>
 </html>

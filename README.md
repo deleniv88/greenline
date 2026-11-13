@@ -6,6 +6,7 @@ Static site, no build step. Deploy on Vercel with framework preset **Other** (ou
 
 - `index.html` — the whole site (HTML, CSS, JS)
 - `img/` — photos (WebP)
-- `frames/hero`, `frames/hole` — video frames for scroll scrubbing
+- `frames/hero`, `frames/hole` — video frames (hero scrubbed by scroll, hole finale played as video)
+- `video/` — hole flyover clips (1080p H.264) for the course gallery
 
 Imagery generated with AI (Figma AI, Seedance). Copy, prices and contacts are demo content.
