@@ -585,15 +585,18 @@ function layout(){
  const bs=ballSize();const S=[];
  const endX=MOB?W*.5:W*.5,endY=H*.86;
  S.push({s:HERO_LEN,x:endX,y:HERO_LEN+endY,d:bs*1.15,hop:0,hero:1});
- const spots=[['about',0],['play',0],['academy',0],['plan',0],['reviews',1],['faq',0]];
+ const spots=[['about',0],['play',0],['academy',0],['plan',0],['reviews',0],['faq',0]];
  const gp=MOB?8:12;
  const gTop=$('#galHoles').getBoundingClientRect().top+scrollY+gp;
  const ftr=$('.flyTrack').getBoundingClientRect(),fBot=ftr.bottom+scrollY-gp;
  DIVE={gTop,fBot};
  spots.forEach(([k,j])=>{const el=$(`[data-spot="${k}"]`);const p=docOf(el);
   if(k==='play'){const dB=bs*1.6;
-   S.push({s:gTop-H*.62,x:W*.5,y:gTop+dB*.8,d:dB,hop:0,dive:1});
-   S.push({s:fBot-H*.55,x:W*.5,y:fBot-dB*.8,d:dB,hop:0,jump:1,emerge:1});}
+   S.push({s:gTop-H*.62,x:W*.5,y:gTop+dB*.8,d:dB,hop:0,dive:1,clip:gTop});
+   S.push({s:fBot-H*.55,x:W*.5,y:fBot-dB*.8,d:dB,hop:0,jump:1,emerge:1,clip:fBot});}
+  if(k==='reviews'){const dB=bs*1.6,gc=$('#galClub'),cT=gc.getBoundingClientRect().top+scrollY+gp,cB=gc.getBoundingClientRect().bottom+scrollY-gp;
+   S.push({s:cT-H*.62,x:W*.5,y:cT+dB*.8,d:dB,hop:0,dive:1,clip:cT});
+   S.push({s:cB-H*.55,x:W*.5,y:cB-dB*.8,d:dB,hop:0,jump:1,emerge:1,clip:cB});}
   S.push({s:p.y-H*.5,x:p.x,y:p.y,d:el.offsetWidth||bs,hop:j?0:1,jump:j,el})});
  GALS=$$('.gal').map(g=>({el:g,top:g.getBoundingClientRect().top+scrollY,n:+g.dataset.n,sl:[...g.querySelectorAll('.slide')],bars:[...g.querySelectorAll('.bars i')],cnt:g.querySelector('.cnt')}));
  const ft=$('.flyTrack');FLY={top:ft.getBoundingClientRect().top+scrollY,len:ft.offsetHeight-H};
@@ -655,8 +658,8 @@ function frame(now){
   sy=dy-s+d*.46;sa=.85*(1-Math.sin(Math.PI*te)*(B.hop&&!A.hero?.85:0));
   if(B.hole==='in'){sa*=1-te}
   if(B.hole==='enter'||A.hole==='enter'){BL.style.clipPath=`inset(0 0 ${Math.max(0,H-(HOLE.cardTop-s))}px 0)`}
-  else if(B.dive){BL.style.clipPath=`inset(0 0 ${clamp(H-(DIVE.gTop-s),0,H)}px 0)`}
-  else if(A.emerge){BL.style.clipPath=`inset(${clamp(DIVE.fBot-s,0,H)}px 0 0 0)`}
+  else if(B.dive){BL.style.clipPath=`inset(0 0 ${clamp(H-(B.clip-s),0,H)}px 0)`}
+  else if(A.emerge){BL.style.clipPath=`inset(${clamp(A.clip-s,0,H)}px 0 0 0)`}
   else BL.style.clipPath='none';
   if(A.dive&&B.emerge)hidden=1;
   if(B.dive||A.emerge)sa=0;
